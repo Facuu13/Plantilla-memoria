@@ -18,27 +18,85 @@
 %----------------------------------------------------------------------------------------
 
 %\section{Introducción}
-
+En este capítulo se presenta una visión general de los sistemas de monitoreo y gestión de invernaderos, abordando los desafíos actuales y las oportunidades de mejora. Además, se describen las motivaciones del trabajo, sus objetivos y el alcance de la solución propuesta. 
 %----------------------------------------------------------------------------------------
 \section{Sistema de monitoreo y gestión en invernaderos}
 
+La gestión eficiente de los invernaderos es crucial para maximizar la productividad agrícola, especialmente en un contexto global donde la demanda de alimentos sigue en aumento. Los invernaderos, al ofrecer un entorno controlado para el cultivo, permiten optimizar las condiciones de crecimiento de las plantas. Sin embargo, la evolución de las tecnologías de monitoreo y gestión ha revelado tanto desafíos persistentes como nuevas oportunidades para mejorar estos sistemas.
+
+\subsection{Problemática actual}
+
+La producción agrícola en invernaderos ha evolucionado considerablemente en respuesta a la creciente demanda de cultivos y al aumento de la población mundial. En este contexto, enfrentan desafíos claves que afectan la eficiencia y productividad:
+
+\begin{itemize}
+	\item Descentralización geográfica: la supervisión de invernaderos dispersos resulta difícil, que complica la obtención y el análisis de datos en tiempo real, lo que puede derivar en respuestas tardías a cambios críticos en el entorno de cultivo.
+	\item Falta de unificación en la gestión: los sistemas actuales suelen ser fragmentados, lo que dificulta la implementación de un control eficiente y coordinado en todos los aspectos del cultivo.
+	\item Limitaciones tecnológicas: la infraestructura existente no siempre soporta la recopilación continua y precisa de datos ambientales, lo que afecta la toma de decisiones informada.
+\end{itemize}
+
+\subsection{Oportunidades de mejora}
+
+A la luz de estos desafíos, surgen varias oportunidades para mejorar la eficiencia y efectividad de los sistemas de monitoreo y gestión en invernaderos, orientadas a satisfacer las necesidades tanto de los productores como de la industria en general:
+
+\begin{itemize}
+	\item Implementación de tecnologías avanzadas: la integración de sensores y sistemas de monitoreo más sofisticados puede permitir una recopilación de datos más precisa y en tiempo real, que provoca una mejora en la capacidad de respuesta ante cambios en el entorno.
+	\item Centralización y unificación del control: la adopción de soluciones que permitan un control unificado y centralizado de múltiples invernaderos puede facilitar la gestión y optimizaría los recursos, asegurando condiciones óptimas de cultivo en todas las instalaciones.
+	\item Mejora en la accesibilidad de la información: desarrollar interfaces más accesibles para los usuarios puede mejorar la capacidad para monitorear y ajustar condiciones de cultivo de manera eficiente desde cualquier ubicación.
+\end{itemize}
 
 %----------------------------------------------------------------------------------------
 
 \section{Motivación}
 
-
+La motivación para este trabajo surge de los desafíos que enfrentan los agricultores al gestionar invernaderos dispersos geográficamente. La falta de soluciones integrales para el monitoreo y control remoto limita la eficiencia y productividad. Este trabajo busca desarrollar una solución basada en internet de las cosas (IoT) que permita un control centralizado y optimizado, alineado con las necesidades de Wentux Tecnoagro y con el interés de aplicar tecnologías IoT para mejorar la gestión agrícola.
 
 %----------------------------------------------------------------------------------------
 
 \section{Estado del arte}
+En el mercado actual existen diversas empresas que ofrecen soluciones comerciales diseñadas para optimizar la gestión de invernaderos. Estas herramientas proporcionan una amplia gama de funcionalidades que permiten el control automatizado de parámetros como temperatura, humedad, riego, y ventilación. En la tabla \ref{tabla:empresas_invernaderos} se muestra una comparativa de algunas de las principales soluciones comerciales disponibles, destacando sus características.
+
+\begin{table}[h]
+	\centering
+	\caption[Comparación de soluciones comerciales]{Comparación de soluciones comerciales.}
+	\begin{tabular}{l p{10cm}}    
+		\toprule
+		\textbf{Empresa} 	 & \textbf{Características}  \\
+		\midrule
+		Growcast & Sistema de monitoreo y automatización ambiental con sensores para temperatura, humedad, CO2, y capacidades de control de riego, iluminación y ventilación. Incluye una aplicación móvil para el monitoreo y control en tiempo real. \\		
+		Pulse Grow	 & Sistema especializado en la medición precisa de temperatura, humedad, punto de rocío y déficit de presión de vapor (VPD). Ofrece alertas y ajustes remotos a través de una aplicación móvil. \\
+		TrolMaster	 & Sistema modular que permite el control ambiental, de riego y fertilización. Ofrece un sistema altamente flexible y escalable, permitiendo la integración de múltiples dispositivos para una gestión avanzada de invernaderos. \\
+		\bottomrule
+	\end{tabular}
+	\label{tabla:empresas_invernaderos}
+\end{table}
+
+
+Estas empresas destacan por su capacidad para integrar tecnología avanzada en el control y monitoreo de invernaderos, que facilita una gestión eficiente y adaptada a las necesidades específicas de cada operación agrícola.
+
 
 
 %----------------------------------------------------------------------------------------
 
 \section{Alcance y objetivos}
 
+El objetivo principal de este trabajo fue implementar un sistema que permitiera el monitoreo y la gestión remota de invernaderos, que mejora la eficiencia y la capacidad de respuesta en la gestión de cultivos. Esta propuesta incluyó la implementación de una red de sensores en los invernaderos que recopilan información en tiempo real. Además, se desarrolló una aplicación web progresiva (PWA) para el monitoreo local y un servidor IoT para la gestión remota de datos. Este sistema permitió a los usuarios acceder a la información y controlar los invernaderos desde cualquier lugar, facilitando una gestión eficiente de datos y alarmas.
 
+Dentro del alcance de este trabajo se incluyó:
+\begin{itemize}
+	\item El diseño y desarrollo de un protocolo de comunicación basado en ESP-NOW entre los nodos sensores y el sistema embebido central.
+	\item La creación de una PWA para el monitoreo local de los equipos en los invernaderos.
+	\item La implementación de un servidor en la nube para el almacenamiento y gestión de datos recopilados por los sensores.
+	\item El establecimiento de la comunicación cliente-servidor a través del protocolo MQTT para la transmisión de datos desde el sistema embebido central al servidor en la nube.
+	\item La posibilidad de control remoto de los invernaderos y sus dispositivos desde la aplicación web.
+	\item La gestión de alarmas y administración de los datos recibidos por los dispositivos conectados.
+\end{itemize}
+
+El presente trabajo no incluyó:
+
+\begin{itemize}
+	\item El desarrollo del hardware del sistema embebido central, que ya estaba funcionando.
+	\item Mantenimiento y actualizaciones a largo plazo del sistema.
+\end{itemize}
 
 
 %----------------------------------------------------------------------------------------
