@@ -3,27 +3,111 @@
 \label{Chapter2}
 
 %----------------------------------------------------------------------------------------
-%	SECTION 1
+%	SECTION 2
 %----------------------------------------------------------------------------------------
-Todos los capítulos deben comenzar con un breve párrafo introductorio que indique cuál es el contenido que se encontrará al leerlo.  La redacción sobre el contenido de la memoria debe hacerse en presente y todo lo referido al proyecto en pasado, siempre de modo impersonal.
+En este capítulo se presentarán las tecnologías utilizadas en el desarrollo de este trabajo, detallando sus características fundamentales de funcionamiento y sus especificaciones técnicas.
 
 \section{Esquema general del sistema}
 
-%----------------------------------------------------------------------------------------
-\section{Protocolos de comunicación}
+En la figura \ref{fig:diagBloques}, que se presenta a continuación, se muestra el diagrama en bloques del sistema, en el que se pueden observar:
+\begin{figure}[htpb]
+\centering 
+\includegraphics[width=.6\textwidth]{./Figures/Diagrama_bloques.png}
+\caption{Diagrama en bloques del sistema.}
+\label{fig:diagBloques}
+\end{figure}
+
+\begin{itemize}
+	\item Red de Sensores: recopila datos del entorno del invernadero.
+	\item Módulo Central: recibe datos de los sensores ESP-NOW y los envía al servidor a través de MQTT.
+	\item Comunicación MQTT: facilita la transferencia de datos entre el módulo central y el servidor.
+	\item Servidor IoT: almacena y procesa los datos recibidos de los sensores.
+	\item PWA: permite el monitoreo y control del sistema en la red local.
+	\item Nodos sensores y actuadores: recopilan datos y controlan dispositivos en el invernadero.
+	\item Usuario remoto: accede a los datos recopilados a través del servidor IoT.
+\end{itemize}
+
 
 
 %----------------------------------------------------------------------------------------
 \section{Tecnologías de hardware}
 
-%----------------------------------------------------------------------------------------
-\section{Servidor de internet de las cosas}
+
+\subsection{Microcontrolador}
+
+ESP32C3
+
+\subsection{Sensores}
+
+A continuación, se describen brevemente los sensores utilizados en el sistema.
+
+\begin{itemize}
+    \item LM35: es un sensor de temperatura analógico que proporciona una salida de voltaje linealmente proporcional a la temperatura. \citep{sensor_lm35}
+\end{itemize}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=.2\textwidth]{./Figures/sensor_lm35.png}
+    \caption{Sensor LM35.}
+    \label{fig:lm35}
+\end{figure}
+
+\begin{itemize}
+	\item HTU21: es un sensor digital de humedad relativa y temperatura. Comunica sus lecturas a través de una interfaz I2C. \citep{sensor_htu21}
+\end{itemize}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=.2\textwidth]{./Figures/sensor_htu21.png}
+    \caption{Sensor HTU21.}
+    \label{fig:htu21}
+\end{figure}
+
+\begin{itemize}
+	\item BME280: es un sensor ambiental que mide la presión atmosférica, la humedad y la temperatura. Se comunica a través de I2C o SPI.\citep{sensor_bme280}
+\end{itemize}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=.2\textwidth]{./Figures/sensor_bme280.png}
+    \caption{Sensor BME280.}
+    \label{fig:bme280}
+\end{figure}
+
+\begin{itemize}
+	\item MH-Z19: es un sensor de dióxido de carbono basado en tecnología infrarroja no dispersiva (NDIR). La información se puede obtener a través de las interfaces UART o PWM. \citep{sensor_mhz19}
+\end{itemize}
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=.2\textwidth]{./Figures/sensor_mhz19.png}
+    \caption{Sensor MH-Z19.}
+    \label{fig:mhz19}
+\end{figure}
+
 
 %----------------------------------------------------------------------------------------
-\section{Tecnologías de Firmware}
+\section{Tecnologías de firmware}
+
+\subsection{MicroPython}
+
+MicroPython es una versión reducida y optimizada de Python 3, escrita en C, diseñada para ejecutarse en microcontroladores con recursos limitados, como la memoria y  la capacidad de procesamiento. A diferencia de otros lenguajes de programación, MicroPython es interpretado, lo que significa que el código no se compila previamente, sino que se interpreta durante la ejecución.
+
+Cuenta con un compilador cruzado, que convierte scripts de Python en bytecode que puede ser ejecutado eficientemente en hardware. Además, MicroPython incluye una biblioteca estándar completa, adaptada para trabajar en estos entornos limitados, lo que permite a los desarrolladores escribir código de alto nivel sin tener que recurrir a lenguajes más complejos como C o ensamblador.
+
+Al ser de código abierto, MicroPython está disponible para ser usado y modificado por cualquier persona. Este enfoque abierto, junto con su capacidad de funcionar en hardware limitado, lo hace ideal para la creación de aplicaciones embebidas.
+
+
+%----------------------------------------------------------------------------------------
+\section{Protocolos de comunicación}
 
 %----------------------------------------------------------------------------------------
 \section{Aplicacion web progresiva}
+
+
+%----------------------------------------------------------------------------------------
+\section{Servidor de internet de las cosas}
+
 
 %----------------------------------------------------------------------------------------
 
