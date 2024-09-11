@@ -32,17 +32,25 @@ En la figura \ref{fig:diagBloques}, que se presenta a continuación, se muestra 
 %----------------------------------------------------------------------------------------
 \section{Tecnologías de hardware}
 
+Los componentes de hardware fueron impuestos por la empresa Wentux, por lo que no se tuvo ninguna influencia en la selección del microcontrolador y los sensores.
 
 \subsection{Microcontrolador}
 
 ESP32C3
+
+\begin{figure}[htpb]
+    \centering
+    \includegraphics[width=.3\textwidth]{./Figures/esp32c3.png}
+    \caption{ESP32-C3.}
+    \label{fig:esp32c3}
+\end{figure}
 
 \subsection{Sensores}
 
 A continuación, se describen brevemente los sensores utilizados en el sistema.
 
 \begin{itemize}
-    \item LM35: es un sensor de temperatura analógico que proporciona una salida de voltaje linealmente proporcional a la temperatura. \citep{sensor_lm35}
+    \item Sensor LM35 \citep{sensor_lm35}: es un sensor de temperatura analógico que proporciona una salida de voltaje linealmente proporcional a la temperatura.
 \end{itemize}
 
 \begin{figure}[htpb]
@@ -53,7 +61,7 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 \end{figure}
 
 \begin{itemize}
-	\item HTU21: es un sensor digital de humedad relativa y temperatura. Comunica sus lecturas a través de una interfaz I2C. \citep{sensor_htu21}
+	\item Sensor HTU21 \citep{sensor_htu21}: es un sensor digital de humedad relativa y temperatura. Comunica sus lecturas a través de una interfaz I2C.
 \end{itemize}
 
 \begin{figure}[htpb]
@@ -64,7 +72,7 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 \end{figure}
 
 \begin{itemize}
-	\item BME280: es un sensor ambiental que mide la presión atmosférica, la humedad y la temperatura. Se comunica a través de I2C o SPI.\citep{sensor_bme280}
+	\item Sensor BME280 \citep{sensor_bme280}: es un sensor ambiental que mide la presión atmosférica, la humedad y la temperatura. Se comunica a través de I2C o SPI.
 \end{itemize}
 
 \begin{figure}[htpb]
@@ -75,7 +83,7 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 \end{figure}
 
 \begin{itemize}
-	\item MH-Z19: es un sensor de dióxido de carbono basado en tecnología infrarroja no dispersiva (NDIR). La información se puede obtener a través de las interfaces UART o PWM. \citep{sensor_mhz19}
+	\item Sensor MH-Z19 \citep{sensor_mhz19}: es un sensor de dióxido de carbono basado en tecnología infrarroja no dispersiva (NDIR). La información se puede obtener a través de las interfaces UART o PWM.
 \end{itemize}
 
 \begin{figure}[htpb]
@@ -95,14 +103,14 @@ MicroPython es una versión reducida y optimizada de Python 3, escrita en C, dis
 
 Cuenta con un compilador cruzado, que convierte scripts de Python en bytecode que puede ser ejecutado eficientemente en hardware. Además, MicroPython incluye una biblioteca estándar completa, adaptada para trabajar en estos entornos limitados, lo que permite a los desarrolladores escribir código de alto nivel sin tener que recurrir a lenguajes más complejos como C o ensamblador.
 
-Al ser de código abierto, MicroPython está disponible para ser usado y modificado por cualquier persona. Este enfoque abierto, junto con su capacidad de funcionar en hardware limitado, lo hace ideal para la creación de aplicaciones embebidas.
+Al ser de código abierto, MicroPython está disponible para ser usado y modificado por cualquier persona. Este enfoque abierto, junto con su capacidad de funcionar en hardware limitado, lo hace ideal para la creación de aplicaciones embebidas. \citep{micropython} \citep{infoMpy}
 
 
 %----------------------------------------------------------------------------------------
 \section{Protocolos de comunicación}
 
 %----------------------------------------------------------------------------------------
-\section{Aplicacion web progresiva}
+\section{Aplicación web progresiva}
 
 
 %----------------------------------------------------------------------------------------
