@@ -36,7 +36,10 @@ Los componentes de hardware fueron impuestos por la empresa Wentux, por lo que n
 
 \subsection{Microcontrolador}
 
-ESP32C3
+Para los nodos sensores y el gateway del sistema, se utilizó la placa de desarrollo ESP32-C3 de Espressif Systems, un microcontrolador eficiente y versátil, ideal para aplicaciones de IoT. Cuenta con un núcleo RISC-V de 32 bits, que combina rendimiento y bajo consumo de energía, optimizando la operación de los dispositivos en el sistema de monitoreo y gestión.
+Este microcontrolador admite tanto Wi-Fi como Bluetooth 5 (LE), ofreciendo múltiples opciones de conectividad inalámbrica. Además de estas tecnologías, soporta el protocolo ESP-NOW, una solución de comunicación inalámbrica propietaria de Espressif \citep{esp32c3}.
+
+En la figura \ref{fig:esp32c3} se puede observar el modulo.
 
 \begin{figure}[htpb]
     \centering
@@ -44,6 +47,10 @@ ESP32C3
     \caption{ESP32-C3.}
     \label{fig:esp32c3}
 \end{figure}
+
+El ESP32-C3 también ofrece soporte para actualizaciones OTA (Over-the-Air), lo que facilita la actualización remota del firmware. Además, su amplio conjunto de interfaces de comunicación como UART, I2C, SPI, y ADC, permite la integración con diversos sensores y actuadores, necesarios para la operación del sistema en el invernadero. 
+
+La información completa sobre el microcontrolador y sus especificaciones técnicas está disponible en el sitio web oficial de Espressif \citep{docsesp32c3}.
 
 \subsection{Sensores}
 
@@ -53,18 +60,18 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
     \item Sensor LM35 \citep{sensor_lm35}: es un sensor de temperatura analógico que proporciona una salida de voltaje linealmente proporcional a la temperatura.
 \end{itemize}
 
-\begin{figure}[htpb]
-    \centering
-    \includegraphics[width=.2\textwidth]{./Figures/sensor_lm35.png}
-    \caption{Sensor LM35.}
-    \label{fig:lm35}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.2\textwidth]{./Figures/sensor_lm35.png}
+	\caption{Sensor LM35.}
+	\label{fig:lm35}
 \end{figure}
 
 \begin{itemize}
 	\item Sensor HTU21 \citep{sensor_htu21}: es un sensor digital de humedad relativa y temperatura. Comunica sus lecturas a través de una interfaz I2C.
 \end{itemize}
 
-\begin{figure}[htpb]
+\begin{figure}[H]
     \centering
     \includegraphics[width=.2\textwidth]{./Figures/sensor_htu21.png}
     \caption{Sensor HTU21.}
@@ -75,7 +82,7 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 	\item Sensor BME280 \citep{sensor_bme280}: es un sensor ambiental que mide la presión atmosférica, la humedad y la temperatura. Se comunica a través de I2C o SPI.
 \end{itemize}
 
-\begin{figure}[htpb]
+\begin{figure}[H]
     \centering
     \includegraphics[width=.2\textwidth]{./Figures/sensor_bme280.png}
     \caption{Sensor BME280.}
@@ -86,9 +93,9 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 	\item Sensor MH-Z19 \citep{sensor_mhz19}: es un sensor de dióxido de carbono basado en tecnología infrarroja no dispersiva (NDIR). La información se puede obtener a través de las interfaces UART o PWM.
 \end{itemize}
 
-\begin{figure}[htpb]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=.2\textwidth]{./Figures/sensor_mhz19.png}
+    \includegraphics[width=.3\textwidth]{./Figures/sensor_mhz19.png}
     \caption{Sensor MH-Z19.}
     \label{fig:mhz19}
 \end{figure}
@@ -105,6 +112,15 @@ Cuenta con un compilador cruzado, que convierte scripts de Python en bytecode qu
 
 Al ser de código abierto, MicroPython está disponible para ser usado y modificado por cualquier persona. Este enfoque abierto, junto con su capacidad de funcionar en hardware limitado, lo hace ideal para la creación de aplicaciones embebidas. \citep{micropython} \citep{infoMpy}
 
+\subsubsection{Elección de MicroPython}
+MicroPython fue elegido para este trabajo debido a varias ventajas clave:
+
+\begin{itemize}
+    \item Desarrollo ágil: al ser una versión optimizada de Python, permite un desarrollo rápido y eficiente, lo que es esencial para iterar y ajustar la funcionalidad del sistema y agregar nuevas características sin demoras.
+    \item Pruebas y depuración sencillas: la capacidad de ejecutar scripts interactivos facilita la detección y corrección de errores en tiempo real, acelerando el proceso de desarrollo y depuración.
+    \item Facilidad de integración con IoT: el ecosistema de MicroPython incluye bibliotecas que permiten integrar fácilmente protocolos de comunicación como ESP-NOW y MQTT, esenciales para la transmisión de datos  desde los sensores al gateway, y de este al servidor IoT.
+    \item Soporte y comunidad activa: cuenta con una amplia comunidad y documentación \citep{docsmpy}.
+\end{itemize}
 
 %----------------------------------------------------------------------------------------
 \section{Protocolos de comunicación}
