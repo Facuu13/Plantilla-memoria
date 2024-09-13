@@ -5,27 +5,28 @@
 %----------------------------------------------------------------------------------------
 %	SECTION 2
 %----------------------------------------------------------------------------------------
-En este capítulo se presentarán las tecnologías utilizadas en el desarrollo de este trabajo, detallando sus características fundamentales de funcionamiento y sus especificaciones técnicas.
+En este capítulo se presentan las tecnologías utilizadas en el desarrollo de este trabajo, detallando sus características fundamentales de funcionamiento y sus especificaciones técnicas.
 
 \section{Esquema general del sistema}
 
 En la figura \ref{fig:diagBloques}, que se presenta a continuación, se muestra el diagrama en bloques del sistema, en el que se pueden observar:
-\begin{figure}[htpb]
-\centering 
-\includegraphics[width=.6\textwidth]{./Figures/Diagrama_bloques.png}
-\caption{Diagrama en bloques del sistema.}
-\label{fig:diagBloques}
-\end{figure}
 
 \begin{itemize}
-	\item Red de Sensores: recopila datos del entorno del invernadero.
-	\item Módulo Central: recibe datos de los sensores ESP-NOW y los envía al servidor a través de MQTT.
+	\item Red de sensores: recopila datos del entorno del invernadero.
+	\item Nodo central: recibe datos de los sensores ESP-NOW y los envía al servidor a través de MQTT.
 	\item Comunicación MQTT: facilita la transferencia de datos entre el módulo central y el servidor.
 	\item Servidor IoT: almacena y procesa los datos recibidos de los sensores.
 	\item PWA: permite el monitoreo y control del sistema en la red local.
 	\item Nodos sensores y actuadores: recopilan datos y controlan dispositivos en el invernadero.
 	\item Usuario remoto: accede a los datos recopilados a través del servidor IoT.
 \end{itemize}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=.5\textwidth]{./Figures/Diagrama_bloques.png}
+\caption{Diagrama en bloques del sistema.}
+\label{fig:diagBloques}
+\end{figure}
 
 
 
@@ -36,7 +37,7 @@ Los componentes de hardware fueron impuestos por la empresa Wentux, por lo que n
 
 \subsection{Microcontrolador}
 
-Para los nodos sensores y el gateway del sistema, se utilizó la placa de desarrollo ESP32-C3 de Espressif Systems, un microcontrolador eficiente y versátil, ideal para aplicaciones de IoT. Cuenta con un núcleo RISC-V de 32 bits, que combina rendimiento y bajo consumo de energía, optimizando la operación de los dispositivos en el sistema de monitoreo y gestión.
+Para los nodos sensores y el gateway del sistema, se utilizó la placa de desarrollo ESP32-C3 de Espressif Systems, un microcontrolador eficiente y versátil, ideal para aplicaciones de IoT. Cuenta con un núcleo RISC-V de 32 bits, que combina rendimiento y bajo consumo de energía, lo que optimiza la operación de los dispositivos en el sistema de monitoreo y gestión.
 Este microcontrolador admite tanto Wi-Fi como Bluetooth 5 (LE), ofreciendo múltiples opciones de conectividad inalámbrica. Además de estas tecnologías, soporta el protocolo ESP-NOW, una solución de comunicación inalámbrica propietaria de Espressif \citep{esp32c3}.
 
 En la figura \ref{fig:esp32c3} se puede observar el modulo.
@@ -44,11 +45,11 @@ En la figura \ref{fig:esp32c3} se puede observar el modulo.
 \begin{figure}[htpb]
     \centering
     \includegraphics[width=.3\textwidth]{./Figures/esp32c3.png}
-    \caption{ESP32-C3.}
+    \caption{Módulo ESP32-C3.}
     \label{fig:esp32c3}
 \end{figure}
 
-El ESP32-C3 también ofrece soporte para actualizaciones OTA (Over-the-Air), lo que facilita la actualización remota del firmware. Además, su amplio conjunto de interfaces de comunicación como UART, I2C, SPI, y ADC, permite la integración con diversos sensores y actuadores, necesarios para la operación del sistema en el invernadero. 
+El ESP32-C3 también ofrece soporte para actualizaciones OTA (Over-the-Air), lo que facilita la actualización remota del firmware. Además, su amplio conjunto de interfaces de comunicación como UART, I2C, SPI, y ADC permite la integración con diversos sensores y actuadores, necesarios para la operación del sistema en el invernadero. 
 
 La información completa sobre el microcontrolador y sus especificaciones técnicas está disponible en el sitio web oficial de Espressif \citep{docsesp32c3}.
 
@@ -57,7 +58,7 @@ La información completa sobre el microcontrolador y sus especificaciones técni
 A continuación, se describen brevemente los sensores utilizados en el sistema.
 
 \begin{itemize}
-    \item Sensor LM35 \citep{sensor_lm35}: es un sensor de temperatura analógico que proporciona una salida de voltaje linealmente proporcional a la temperatura.
+    \item Sensor LM35 \citep{sensor_lm35}: es un sensor de temperatura analógico que proporciona una salida de voltaje linealmente proporcional a la temperatura. En la figura \ref{fig:lm35} se puede observar el sensor.
 \end{itemize}
 
 \begin{figure}[H]
@@ -68,7 +69,7 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 \end{figure}
 
 \begin{itemize}
-	\item Sensor HTU21 \citep{sensor_htu21}: es un sensor digital de humedad relativa y temperatura. Comunica sus lecturas a través de una interfaz I2C.
+	\item Sensor HTU21 \citep{sensor_htu21}: es un sensor digital de humedad relativa y temperatura. Comunica sus lecturas a través de una interfaz I2C. En la figura \ref{fig:htu21} se puede observar el sensor.
 \end{itemize}
 
 \begin{figure}[H]
@@ -79,7 +80,7 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 \end{figure}
 
 \begin{itemize}
-	\item Sensor BME280 \citep{sensor_bme280}: es un sensor ambiental que mide la presión atmosférica, la humedad y la temperatura. Se comunica a través de I2C o SPI.
+	\item Sensor BME280 \citep{sensor_bme280}: es un sensor ambiental que mide la presión atmosférica, la humedad y la temperatura. Se comunica a través de I2C o SPI. En la figura \ref{fig:bme280} se puede observar el sensor.
 \end{itemize}
 
 \begin{figure}[H]
@@ -90,7 +91,7 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 \end{figure}
 
 \begin{itemize}
-	\item Sensor MH-Z19 \citep{sensor_mhz19}: es un sensor de dióxido de carbono basado en tecnología infrarroja no dispersiva (NDIR). La información se puede obtener a través de las interfaces UART o PWM.
+	\item Sensor MH-Z19 \citep{sensor_mhz19}: es un sensor de dióxido de carbono basado en tecnología infrarroja no dispersiva (NDIR). La información se puede obtener a través de las interfaces UART o PWM. En la figura \ref{fig:mhz19} se puede observar el sensor.
 \end{itemize}
 
 \begin{figure}[H]
@@ -104,26 +105,47 @@ A continuación, se describen brevemente los sensores utilizados en el sistema.
 %----------------------------------------------------------------------------------------
 \section{Tecnologías de firmware}
 
+En esta sección se presenta la tecnología utilizada en el trabajo, explicando qué es y las razones de su elección.
+
 \subsection{MicroPython}
 
-MicroPython es una versión reducida y optimizada de Python 3, escrita en C, diseñada para ejecutarse en microcontroladores con recursos limitados, como la memoria y  la capacidad de procesamiento. A diferencia de otros lenguajes de programación, MicroPython es interpretado, lo que significa que el código no se compila previamente, sino que se interpreta durante la ejecución.
+MicroPython es una versión reducida y optimizada de Python 3, escrita en C, diseñada para ejecutarse en microcontroladores con recursos limitados (como la memoria y  la capacidad de procesamiento). A diferencia de otros lenguajes de programación, MicroPython es interpretado, lo que significa que el código no se compila previamente, sino que se interpreta durante la ejecución.
 
 Cuenta con un compilador cruzado, que convierte scripts de Python en bytecode que puede ser ejecutado eficientemente en hardware. Además, MicroPython incluye una biblioteca estándar completa, adaptada para trabajar en estos entornos limitados, lo que permite a los desarrolladores escribir código de alto nivel sin tener que recurrir a lenguajes más complejos como C o ensamblador.
 
-Al ser de código abierto, MicroPython está disponible para ser usado y modificado por cualquier persona. Este enfoque abierto, junto con su capacidad de funcionar en hardware limitado, lo hace ideal para la creación de aplicaciones embebidas. \citep{micropython} \citep{infoMpy}
+Al ser de código abierto, MicroPython está disponible para ser usado y modificado por cualquier persona. Este enfoque abierto, junto con su capacidad de funcionar en hardware limitado, lo hace ideal para la creación de aplicaciones embebidas \citep{micropython} \citep{infoMpy}. 
 
 \subsubsection{Elección de MicroPython}
 MicroPython fue elegido para este trabajo debido a varias ventajas clave:
 
 \begin{itemize}
     \item Desarrollo ágil: al ser una versión optimizada de Python, permite un desarrollo rápido y eficiente, lo que es esencial para iterar y ajustar la funcionalidad del sistema y agregar nuevas características sin demoras.
-    \item Pruebas y depuración sencillas: la capacidad de ejecutar scripts interactivos facilita la detección y corrección de errores en tiempo real, acelerando el proceso de desarrollo y depuración.
-    \item Facilidad de integración con IoT: el ecosistema de MicroPython incluye bibliotecas que permiten integrar fácilmente protocolos de comunicación como ESP-NOW y MQTT, esenciales para la transmisión de datos  desde los sensores al gateway, y de este al servidor IoT.
+    \item Pruebas y depuración sencillas: la capacidad de ejecutar scripts interactivos facilita la detección y corrección de errores en tiempo real, lo que acelera el proceso de desarrollo y depuración.
+    \item Facilidad de integración con IoT: el ecosistema de MicroPython incluye bibliotecas que permiten integrar fácilmente protocolos de comunicación como ESP-NOW y MQTT, esenciales para la transmisión de datos  desde los sensores al gateway y de este al servidor IoT.
     \item Soporte y comunidad activa: cuenta con una amplia comunidad y documentación \citep{docsmpy}.
 \end{itemize}
 
 %----------------------------------------------------------------------------------------
 \section{Protocolos de comunicación}
+
+\subsection{Protocolo ESP-NOW}
+
+ESP-NOW es un protocolo de comunicación inalámbrica desarrollado por Espressif para sus dispositivos. A diferencia de los protocolos convencionales que operan en varias capas del modelo OSI, ESP-NOW se basa exclusivamente en la capa de enlace de datos (capa 2), lo que simplifica la comunicación reduciendo las cinco capas del modelo OSI a una sola, esto se puede observar en la figura \ref{fig:espnow}. Esta arquitectura optimizada le permite ser extremadamente eficiente en términos de recursos, ocupando menos CPU y memoria flash en los dispositivos, lo cual es crucial para aplicaciones IoT con restricciones de energía y recursos \citep{espnow}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\textwidth]{./Figures/espnow.png}
+    \caption{Modelo ESP-NOW.}
+    \label{fig:espnow}
+\end{figure}
+
+ESP-NOW permite la transmisión directa de datos entre dispositivos sin necesidad de una red Wi-Fi o internet. Además, puede funcionar junto con Wi-Fi y Bluetooth LE, ofreciendo flexibilidad para integrarse en sistemas híbridos.
+
+El protocolo admite transmisión unicast y broadcast, lo que facilita la comunicación eficiente entre múltiples dispositivos en redes distribuidas. También optimiza el consumo energético, permitiendo a los dispositivos operar en modo de baja potencia, esencial en nodos sensores que operan con baterías y donde la optimización de consumo es crítica.
+
+Por ultimo, ESP-NOW soporta encriptación, que garantiza la seguridad en la transmisión de datos entre los nodos.
+
+\subsection{Protocolo MQTT}
 
 %----------------------------------------------------------------------------------------
 \section{Aplicación web progresiva}
