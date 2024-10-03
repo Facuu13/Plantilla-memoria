@@ -18,7 +18,7 @@
 %----------------------------------------------------------------------------------------
 
 %\section{Introducción}
-En este capítulo se presenta una visión general de los sistemas de monitoreo y gestión de invernaderos, y se abordan los desafíos actuales y las oportunidades de mejora. Además, se describen las motivaciones del trabajo, sus objetivos y el alcance de la solución propuesta. 
+En este capítulo se presenta una visión general de los sistemas de monitoreo y gestión de invernaderos, y se abordan los desafíos actuales y las oportunidades de mejora. Además, se describen las motivaciones del trabajo, sus objetivos, el alcance de la solución propuesta y los requerimientos.
 %----------------------------------------------------------------------------------------
 \section{Sistema de monitoreo y gestión en invernaderos}
 
@@ -33,6 +33,12 @@ La producción agrícola en invernaderos ha evolucionado considerablemente en re
 	\item Falta de unificación en la gestión: los sistemas actuales suelen ser fragmentados, lo que dificulta la implementación de un control eficiente y coordinado en todos los aspectos del cultivo.
 	\item Limitaciones tecnológicas: la infraestructura existente no siempre soporta la recopilación continua y precisa de datos ambientales, lo que afecta la toma de decisiones informada.
 \end{itemize}
+
+\subsection{Wentux}
+
+Wentux \citep{wentux} es una empresa argentina que se especializa en el desarrollo de soluciones tecnológicas para la gestión y monitoreo de invernaderos. Ofrece productos que optimizan el ambiente controlado de los cultivos mediante el uso de tecnologías avanzadas, como sensores de humedad de suelo, controladores de CO2, sistemas de riego y kits para hidroponía. Estos productos están orientados a mejorar la eficiencia y productividad en entornos agrícolas de precisión, especialmente en invernaderos.
+
+La empresa enfrenta varias problemáticas relacionadas con la descentralización geográfica de los invernaderos y la falta de un sistema unificado que permita una gestión centralizada y eficiente. Además, busca soluciones que puedan facilitar el monitoreo remoto y el control en tiempo real de las condiciones ambientales, lo que podría aumentar considerablemente la capacidad de respuesta a los cambios críticos en el entorno de cultivo.
 
 \subsection{Oportunidades de mejora}
 
@@ -101,3 +107,35 @@ El presente trabajo no incluyó:
 
 %----------------------------------------------------------------------------------------
 
+\section{Requerimientos}
+A continuación se presentan los requerimientos del trabajo:
+\begin{enumerate}
+	\item Requerimientos funcionales
+		\begin{enumerate}
+			\item El sistema debe permitir que los módulos ESP-NOW se comuniquen con el módulo central y puedan intercambiar datos.
+			\item Los módulos ESP-NOW deben contar con una configuración de bajo consumo para permitir su uso con baterías.
+			\item El usuario deberá tener la capacidad de habilitar o deshabilitar los distintos módulos disponibles.
+			\item El módulo central debe ser capaz de auto detectar los módulos que estén dentro de su alcance.
+			\item Se implementará un servidor de forma local con el software OpenRemote para el monitoreo remoto de los datos.
+			\item El módulo central se conectará al servidor a través del protocolo MQTT.
+			\item El módulo central debe proporcionar una interfaz web embebida para acceder a los datos de los sensores y relés del invernadero de manera local.
+		\end{enumerate}
+	\item Requerimientos de documentación
+		\begin{enumerate}
+			\item Se documentarán las bibliotecas para implementar la red de sensores. 
+			\item Se documentará el proceso general del desarrollo de la PWA y sus bibliotecas y/o frameworks utilizados.
+			\item Se documentará el procedimiento de instalación y puesta en marcha del software OpenRemote y sus dependencias en el servidor.
+		\end{enumerate}
+	\item Requerimientos de la interfaz
+		\begin{enumerate}
+			\item La PWA será la interfaz principal para obtener los datos que se recolectan.
+			\item La PWA configurará y monitoreará la red. 
+			\item La PWA requerirá acceso con usuario y contraseña.
+			\item La PWA deberá enviar comandos a través de ESP-NOW a los nodos sensores para ejecutar funciones solicitadas por el usuario.
+		\end{enumerate}
+	\item Requerimientos confidencialidad
+		\begin{enumerate}
+			\item Se deberá mantener confidencialidad sobre algunos aspectos de los secretos comerciales, métodos de trabajo y de la información.
+			\item Se deberá comprometer a mantener en el futuro dicha conducta.
+		\end{enumerate}
+\end{enumerate}

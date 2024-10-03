@@ -1,6 +1,6 @@
 \chapter{Diseño e implementación} % Main chapter title
 
-En este capítulo se van a describir las soluciones planteadas al problema resuelto en este trabajo.
+En este capítulo se describen las soluciones planteadas al problema resuelto en este trabajo.
 
 %----------------------------------------------------------------------------------------
 %	SECTION 1
@@ -11,7 +11,7 @@ En la figura \ref{fig:arqSistema} se puede observar un esquema simple del sistem
 
 \begin{itemize}
 	\item Nodos sensores.
-	\item Nodo Central.
+	\item Nodo central.
 	\item Aplicacion web progresiva.
 	\item Broker.
 	\item Servidor IoT.
@@ -32,7 +32,7 @@ Están conformados por un módulo ESP32-C3 y un sensor. Esta es la capa de perce
 
 \subsection{Nodo central}
 
-Como se mencionó, este nodo se comunica con los sensores a través de ESP-NOW. Actúa como la capa de transporte, encargándose de transferir los datos capturados por la capa de percepción. Además, el \textit{gateway} integra una interfaz web embebida para visualizar los datos de los sensores y el estado de los relés. Esta interfaz está implementada utilizando un socket y, en caso de ausencia de conexión a internet, genera un “Access Point” (AP) local al cual el usuario puede conectarse para monitorear el estado del invernadero. El nodo central se conecta a internet mediante Wi-Fi para enviar los datos a un \textit{broker} MQTT (Mosquitto), empleando certificados TLS para asegurar la transmisión.
+Como se mencionó, este nodo se comunica con los sensores a través de ESP-NOW. Actúa como la capa de transporte, encargándose de transferir los datos capturados por la capa de percepción. Además, el \textit{gateway} integra una interfaz web embebida para visualizar los datos de los sensores y el estado de los relés. Esta interfaz está implementada utilizando un socket y, en caso de ausencia de conexión a internet, genera un \textit{Access Point} (AP) local al cual el usuario puede conectarse para monitorear el estado del invernadero. El nodo central se conecta a internet mediante Wi-Fi para enviar los datos a un \textit{broker} MQTT (Mosquitto), empleando certificados TLS para asegurar la transmisión.
 
 \subsection{Servidor IoT}
 
@@ -44,9 +44,9 @@ Además de almacenar y visualizar los datos en tiempo real, el servidor permite 
 %----------------------------------------------------------------------------------------
 \section{Desarrollo del firmware}
 
-El \textit{firmware} del trabajo fue desarrollado utilizando el lenguaje de programación \textit{Python}, específicamente bajo el \textit{framework MicroPython}. Para su implementación, se empleó el entorno de desarrollo Visual Studio Code, que facilitó la edición y depuración del código.
+El firmware del trabajo fue desarrollado utilizando el lenguaje de programación python, específicamente bajo el \textit{framework} micropython. Para su implementación, se empleó el entorno de desarrollo Visual Studio Code, que facilitó la edición y depuración del código.
 
-En esta sección se presentan los diagramas de flujo que describen los procesos clave de los nodos sensores, el módulo de relés y el nodo central. Estos diagramas ilustran la lógica implementada en el \textit{firmware} y cómo se gestiona la comunicación eficiente entre sensores, actuadores, la interfaz web y el servidor IoT.
+En esta sección se presentan los diagramas de flujo que describen los procesos clave de los nodos sensores, el módulo de relés y el nodo central. Estos diagramas ilustran la lógica implementada en el firmware y cómo se gestiona la comunicación eficiente entre sensores, actuadores, la interfaz web y el servidor IoT.
 
 \subsection{Nodos sensores y módulo relés}
 
@@ -59,7 +59,7 @@ Cada sensor tendrá un script personalizado, ya que son diferentes entre sí, lo
 Primero, se inicializa y configura ESP-NOW para enviar mensajes en modo \textit{broadcast} (difusión) a todos los dispositivos cercanos, sin la necesidad de conocer sus direcciones MAC individuales
 A continuación, el nodo busca el canal en el que se encuentra el \textit{gateway}. Una vez encontrado, se envía un mensaje de verificación para confirmar que el canal es el correcto. Si no se recibe respuesta, el nodo se reinicia, comenzando el proceso nuevamente.
 
-Cuando el canal es verificado, se toma la lectura de los datos del sensor y se envía esta información al \textit{gateway} vía ESP-NOW, de forma encriptada, utilizando una librería específica de \textit{MicroPython} llamada \textit{cryptolib} \citep{docsmpy}.
+Cuando el canal es verificado, se toma la lectura de los datos del sensor y se envía esta información al \textit{gateway} vía ESP-NOW, de forma encriptada, utilizando una librería específica de micropython llamada \textit{cryptolib} \citep{docsmpy}.
 
 Una vez que la información ha sido enviada, el dispositivo entra en \textit{modo DeepSleep} (sueño profundo) durante un tiempo determinado, con el fin de ahorrar energía. Al despertar, el módulo se reinicia como si hubiese sido encendido nuevamente.
 
