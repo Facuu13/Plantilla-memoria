@@ -13,17 +13,17 @@
 
 \section{Conclusiones generales }
 
-La idea de esta sección es resaltar cuáles son los principales aportes del trabajo realizado y cómo se podría continuar. Debe ser especialmente breve y concisa. Es buena idea usar un listado para enumerar los logros obtenidos.
+La implementación de un sistema de monitoreo y gestión remota para invernaderos, basada en redes de sensores IoT, representa un avance significativo hacia una agricultura más eficiente y sostenible. Este trabajo ha logrado integrar exitosamente tecnologías de comunicación inalámbrica como ESP-NOW y MQTT, un servidor IoT basado en OpenRemote y una aplicación web para el control y visualización en tiempo real. La solución permite a los usuarios monitorear condiciones ambientales y gestionar dispositivos en invernaderos de forma remota y centralizada, mejorando la capacidad de respuesta ante cambios críticos y optimizando el uso de recursos.
 
-Algunas preguntas que pueden servir para completar este capítulo:
+Durante el desarrollo, se alcanzaron los objetivos principales, a pesar de ciertos ajustes realizados sobre la marcha para adaptar el sistema a los recursos embebidos. Aunque la planificación inicial fue flexible, el enfoque modular permitió avanzar en varios frentes simultáneamente. Esto fue especialmente útil cuando surgieron desafíos técnicos, permitiendo progresar en otros aspectos mientras se resolvían bloqueos específicos. Además, el trabajo enfrentó riesgos, siendo el principal la falta de tiempo hacia el final, especialmente en la elaboración de la memoria. La asignación de horas adicionales permitió alcanzar las metas y destacó la importancia de una planificación flexible y un plan de mitigación efectivo.
 
-\begin{itemize}
-\item ¿Cuál es el grado de cumplimiento de los requerimientos?
-\item ¿Cuán fielmente se puedo seguir la planificación original (cronograma incluido)?
-\item ¿Se manifestó algunos de los riesgos identificados en la planificación? ¿Fue efectivo el plan de mitigación? ¿Se debió aplicar alguna otra acción no contemplada previamente?
-\item Si se debieron hacer modificaciones a lo planificado ¿Cuáles fueron las causas y los efectos?
-\item ¿Qué técnicas resultaron útiles para el desarrollo del proyecto y cuáles no tanto?
-\end{itemize}
+Para optimizar el sistema, se realizaron algunos cambios clave. Por ejemplo, se eligió el protocolo ESP-NOW en lugar de BLE, aprovechando sus ventajas en dispositivos ESP, lo que simplificó la implementación y garantizó una comunicación eficaz sin depender de una red Wi-Fi. Asimismo, el servidor IoT fue configurado para operar de forma local, en lugar de en la nube, cumpliendo con los requisitos actuales del cliente y permitiendo una posible migración en el futuro. La interfaz web se alojó en el nodo central, lo que limitó algunas funciones avanzadas, pero resultó funcional y adecuada para monitoreo local.
+
+La integración de ESP-NOW y MQTT, junto con un enfoque modular, facilitó una comunicación fluida y segura entre los dispositivos y el servidor, validando la confiabilidad del sistema en diversas condiciones de operación.
+
+Los ensayos y resultados obtenidos corroboraron la precisión del sistema en diversas condiciones, validando su eficacia para mejorar la supervisión y el control en un entorno agrícola. Además, la adaptabilidad del sistema a situaciones con y sin conectividad a internet amplía su aplicabilidad, especialmente en áreas rurales con limitaciones en la infraestructura de red. 
+
+En conclusión, este trabajo sienta las bases para el desarrollo de sistemas de monitoreo en agricultura, ofreciendo una solución flexible y que puede escalar con el tiempo. Esto ayuda a mejorar la sostenibilidad y el uso eficiente de los recursos en la agricultura moderna.
 
 
 %----------------------------------------------------------------------------------------
@@ -31,4 +31,19 @@ Algunas preguntas que pueden servir para completar este capítulo:
 %----------------------------------------------------------------------------------------
 \section{Próximos pasos}
 
-Acá se indica cómo se podría continuar el trabajo más adelante.
+Se podrían considerar las siguientes mejoras:
+
+\begin{itemize}
+    \item Integración de algoritmos de inteligencia artificial (IA): incorporar IA para identificar patrones en los datos y proponer acciones preventivas o automatizadas en la gestión de cultivos, lo cual ayudaría a optimizar el rendimiento de los invernaderos.
+    
+    \item Notificaciones en tiempo real: ampliar la funcionalidad de la aplicación web para incluir notificaciones automáticas que alerten al usuario sobre cambios críticos en las condiciones ambientales o fallas en el sistema, mejorando la capacidad de respuesta.
+    
+    \item Personalización avanzada de alarmas: permitir a los usuarios configurar umbrales personalizados y ajustar el tipo de alertas, adaptándose así a distintos tipos de cultivo o necesidades específicas del entorno.
+    
+    \item Migración del servidor IoT a la nube: instalar el servidor en una plataforma en la nube para facilitar el acceso remoto y escalar la solución para supervisar múltiples invernaderos desde una única plataforma centralizada.   
+    
+    \item Control remoto avanzado de dispositivos: desarrollar una interfaz que permita no solo monitorear sino también controlar aspectos avanzados de los dispositivos conectados, como la regulación de riego o ventilación de manera precisa.
+\end{itemize}
+
+Estas mejoras ayudarían a llevar el sistema actual a un nivel superior, haciéndolo más robusto, escalable y adaptable a las necesidades de la agricultura moderna.
+

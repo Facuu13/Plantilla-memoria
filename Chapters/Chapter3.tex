@@ -143,11 +143,218 @@ En la figura \ref{fig:flujoAP} se presenta el diagrama de flujo del loopCL.
 %----------------------------------------------------------------------------------------
 \section{Desarrollo de la aplicacion web progresiva}
 
+La aplicación web progresiva (PWA) fue desarrollada utilizando tecnologías web estándar como HTML \citep{html}, CSS \citep{css} y JavaScript \citep{js}. Su objetivo principal es proporcionar a los usuarios una interfaz intuitiva y accesible para visualizar la información generada por los sensores y monitorear los estados de los relés. Además, la PWA permite a los usuarios interactuar con los relés, facilitando el cambio de estado de estos dispositivos en tiempo real. También se incluye la funcionalidad para editar la configuración del \textit{gateway}, ofreciendo un control integral y eficiente del sistema.
+
+\subsection{Login de la PWA}
+
+En la figura \ref{fig:login} se muestra la pantalla de inicio de sesión, donde el usuario debe ingresar su nombre de usuario y contraseña para acceder al sistema. 
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.7\textwidth]{./Figures/login.png}
+\caption{Pantalla de login.}
+\label{fig:login}
+\end{figure}
+
+
+El sistema cuenta con un método de validación basado en \textit{localstorage}, lo que garantiza que, incluso si se conoce la URL de acceso a las distintas pantallas, no se puede ingresar sin haber iniciado sesión previamente. 
+
+En caso de que se cometa un error al ingresar las credenciales, el sistema desplegará un mensaje indicando que son incorrectas, tal como se muestra en la figura \ref{fig:login_inc}.
+
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.7\textwidth]{./Figures/login_inc.png}
+\caption{Pantalla de login con datos incorrectos.}
+\label{fig:login_inc}
+\end{figure}
+
+\subsection{Pagina principal}
+
+La figura \ref{fig:home_ini} muestra la pantalla principal de la aplicación web progresiva (PWA) sin ningún sensor ni relé cargado. En esta pantalla, los usuarios pueden acceder a dos funciones principales mediante botones ubicados en la parte superior derecha: uno para navegar a la página de configuración y otro para cerrar sesión. La página también está preparada para desplegar la información de los sensores y relés, que aparecerán en las secciones correspondientes una vez se carguen los datos.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/home_ini.png}
+\caption{Pantalla principal.}
+\label{fig:home_ini}
+\end{figure}
+
+En la figura \ref{fig:home_comp} se muestra la pantalla principal de la PWA con los sensores y relés ya cargados. En esta interfaz, los usuarios pueden visualizar en tiempo real la información de los sensores y los relés conectados al sistema.
+
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=1\textwidth]{./Figures/home_comp.png}
+\caption{Pantalla principal.}
+\label{fig:home_comp}
+\end{figure}
+
+
+Cada sensor presenta los siguientes atributos:
+
+\begin{itemize}
+	\item Nodo: este campo muestra la dirección MAC del nodo al que está conectado el sensor.
+	\item Topic: define la variable que está siendo medida por el sensor. Puede variar según el tipo de sensor, por ejemplo, sensor/temp para la temperatura, sensor/hum para la humedad, o sensor/co2 para la concentración de CO2, entre otros.
+	\item Valor: indica el valor actual de la variable que el sensor está midiendo.
+	\item Última medición: muestra la fecha y hora de la última vez que se recibió un dato válido desde el sensor.
+	\item Modelo sensor: especifica el nombre o tipo del sensor utilizado.
+\end{itemize}
+
+En la sección de relés, la PWA permite a los usuarios interactuar y controlar los dispositivos conectados:
+
+\begin{itemize}
+	\item Nodo: al igual que los sensores, este campo muestra la dirección MAC del nodo al que está asociado el relé.
+	\item Topic: define el relé específico que se está controlando, utilizando un formato del tipo sensor/rele/state/X, donde X representa el número del relé.
+	\item Botón on/off: cada relé tiene un interruptor visual que permite al usuario encender o apagar el dispositivo manualmente.
+	\item Último estado: registra la fecha y hora del último cambio en el estado del relé.
+\end{itemize}
+
+\subsection{Pantalla de configuración}
+
+La página de configuración permite al usuario ajustar los parámetros clave del sistema para su correcto funcionamiento en diferentes modos operativos, dependiendo de si el dispositivo actúa como Cliente (CL) o como Punto de Acceso (AP). La configuración se realiza a través de un formulario con varios campos que permiten personalizar aspectos como la conexión Wi-Fi, el broker MQTT, y otros detalles del sistema embebido.
+
+En las figuras \ref{fig:config_1} y \ref{fig:config_2} se puede observar la pantalla de configuración donde tenemos:
+
+Modos de Operación:
+
+\begin{itemize}
+	\item Cliente (CL): en este modo, el dispositivo se conecta a una red Wi-Fi externa.
+	\item Punto de Acceso (AP): en este modo, el dispositivo no tiene acceso a Internet.
+\end{itemize}
+
+Campos principales:
+
+\begin{itemize}
+	\item SSID y Contraseña: estos campos permiten configurar la red Wi-Fi a la que se conectará el dispositivo en modo Cliente. 
+	\item SSID y Contraseña del AP: estos datos se utilizan cuando el dispositivo está en modo Punto de Acceso, permitiendo a otros dispositivos conectarse directamente a este.
+	\item Cliente ID, MQTT \textit{Broker}, Usuario y Contraseña MQTT: son los parámetros necesarios para configurar la comunicación con el servidor de MQTT, que es fundamental para transmitir los datos de los sensores y controlar los relés remotamente.
+	\item Puerto: especifica el puerto utilizado para la conexión MQTT.
+\end{itemize}
+
+Configuración de Fecha y Hora:
+
+\begin{itemize}
+	\item cuando el dispositivo está en modo Cliente sincroniza automáticamente la fecha y la hora a través de Internet, por lo que los campos de Fecha y Hora en la página de configuración están deshabilitados.
+	\item Cuando el dispositivo está en modo AP, es necesario ingresar manualmente la fecha y la hora para asegurar que el sistema embebido, que no tiene acceso a Internet, opere en el tiempo correcto.
+\end{itemize}
+
+
+Botones:
+\begin{itemize}
+	\item Guardar Configuración: este botón guarda los cambios realizados en los parámetros del sistema. Al hacer clic, se edita el archivo de configuración en el sistema y luego se reinicia el dispositivo para aplicar los nuevos parámetros. Este reinicio asegura que el sistema funcione con la configuración más reciente sin necesidad de intervención manual adicional.
+	\item Volver a Inicio: este botón redirige al usuario de vuelta a la pantalla principal de la aplicación, donde puede visualizar los datos de los sensores y relés configurados en el sistema.
+\end{itemize}
+
+Con esta configuración flexible, el sistema puede adaptarse tanto a escenarios con conexión a Internet como a entornos sin conectividad, lo que lo hace ideal para ser implementado en diversos contextos, como invernaderos o áreas rurales donde la conectividad puede ser limitada.
+
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/config_1.png}
+\caption{Pantalla de configuración.}
+\label{fig:config_1}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.8\textwidth]{./Figures/config_2.png}
+\caption{Pantalla de configuración.}
+\label{fig:config_2}
+\end{figure}
+
+
+
+
+
 %----------------------------------------------------------------------------------------
 \section{Implementación del servidor IoT}
 
+
+Para la implementación del servidor IoT se utilizó OpenRemote, el cual se despliega de manera local mediante el uso de Docker \citep{docker}. Docker permite levantar de forma rápida y eficiente el entorno del servidor, facilitando la gestión de contenedores y asegurando que todo el sistema funcione de manera óptima y sin conflictos de dependencias. Este enfoque permite que el servidor esté operativo de manera ágil y estandarizada, sin la necesidad de configuraciones manuales complejas.
+
+Se explicará el proceso de inicio de sesión, la configuración del agente MQTT para conectar con el broker, la creación y configuración de los objetos correspondientes a los sensores y relés mediante Thing Asset, la definición y uso de reglas para automatizar acciones y, finalmente, la configuración del dashboard para la visualización de los datos.
+
+
+\subsection{Login}
+
+En la figura \ref{fig:login_op} se presenta la pantalla de inicio de sesión, donde el usuario debe ingresar su nombre de usuario o correo electrónico, junto con la contraseña, para acceder al sistema. Si las credenciales ingresadas son incorrectas, el sistema mostrará un mensaje de advertencia indicando el error, como se ilustra en la figura \ref{fig:login_op_inc}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.7\textwidth]{./Figures/login_op.png}
+\caption{Pantalla de login de OpenRemote.}
+\label{fig:login_op}
+\end{figure}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.7\textwidth]{./Figures/login_op_inc.png}
+\caption{Pantalla de login de OpenRemote con datos incorrectos.}
+\label{fig:login_op_inc}
+\end{figure}    
+
+\subsection{Agente MQTT y activos}
+Se explicará cómo usar el Agente MQTT en OpenRemote y cómo utilizar los activos (assets) para gestionar la información de los sensores y relés a través de la plataforma.
+
+\subsubsection{Agente MQTT}
+
+OpenRemote cuenta con un Agente MQTT (Cliente) que permite conectar el servidor a un broker MQTT externo. Para establecer esta conexión, es necesario configurar el host del broker, el Cliente ID, el puerto de conexión, así como las credenciales de acceso, que incluyen el usuario y la contraseña. Una vez configurados estos parámetros, el agente se encarga de gestionar los datos que se transmiten entre los sensores y el servidor. Esta integración garantiza que la información fluya de manera eficiente y pueda ser utilizada para la visualización y control de dispositivos a través de la plataforma.
+
+En la figura \ref{fig:conf_mqtt} se puede observar la pantalla de configuración del agente mqtt.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/conf_mqtt.png}
+\caption{Configuración del agente mqtt.}
+\label{fig:conf_mqtt}
+\end{figure}
+
+\subsubsection{Activos (Assets)}
+
+En OpenRemote, los activos representan los objetos correspondientes a los sensores y relés del sistema. Cada activo contiene atributos que reflejan diferentes tipos de datos, como valores de temperatura, humedad o estado de los relés. Para vincular estos atributos al agente MQTT, se utiliza la opción de Agent Link, que permite asociar un atributo a un tópico específico de publicación o suscripción en el broker MQTT, asegurando que los datos recibidos o enviados se manejen correctamente. Esta configuración facilita la integración de los dispositivos físicos con el sistema de gestión IoT. Esto se ilustra en la figura \ref{fig:activo_conf}, donde se muestra el nombre del activo, que en este caso es 'Rele', y su tipo, que es 'boolean'.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=0.9\textwidth]{./Figures/activo_conf.png}
+\caption{Configuración del activo.}
+\label{fig:activo_conf}
+\end{figure}
+
+En la figura \ref{fig:activo_prin} se muestra la pantalla principal de los activos. En la parte izquierda se puede observar el \textit{mqttagent} junto con los activos asociados. También se presenta la información del sensor 1, donde los campos de notas y posición están incorporados al activo por defecto y no pueden deshabilitarse. Se han agregado los atributos 'rele', 'rele 2' y 'temp', que están suscritos al broker MQTT para recibir información. En el caso de los relés, son checkboxes que funcionan con lógica booleana y pueden publicar su estado en caso de que cambien manualmente o a través de reglas.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=1\textwidth]{./Figures/activo_prin.png}
+\caption{Pantalla principal de los activos.}
+\label{fig:activo_prin}
+\end{figure}        
+
+
+\subsection{Reglas}
+
+OpenRemote incluye un motor de reglas que permite a los usuarios automatizar tareas de diversas maneras. Un tipo de regla que destaca es la regla 'Cuando-Entonces', que facilita la creación de acciones basadas en eventos de forma sencilla.
+
+Con las reglas 'Cuando-Entonces', podemos establecer una condición que, al cumplirse, activa una acción. Por ejemplo, en la figura \ref{fig:reglas}, se muestra el activo sensor1, donde si el atributo 'temp' supera los 40 grados, entonces el relé del activo sensor1 se activa mientras que el relé 2 se apaga.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=1\textwidth]{./Figures/reglas.png}
+\caption{Pantalla principal de las reglas.}
+\label{fig:reglas}
+\end{figure}      
+
+\subsection{Dashboard}
+
+OpenRemote ofrece una funcionalidad de \textit{dashboard} totalmente configurable, que permite a los usuarios visualizar los datos de sus sensores y dispositivos de manera gráfica y sencilla. Este panel puede personalizarse utilizando diversos widgets según las necesidades del trabajo. En la figura \ref{fig:dashboard} se muestra un ejemplo de \textit{dashboard} donde se ha configurado un gráfico de líneas para monitorear la temperatura registrada por un sensor, así como la visualización del estado de dos relés. Esta flexibilidad en la configuración permite adaptar la interfaz a distintos casos de uso, ofreciendo una solución visual intuitiva para la monitorización y el control de dispositivos.
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=1\textwidth]{./Figures/dashboard.png}
+\caption{Pantalla principal del dashboard.}
+\label{fig:dashboard}
+\end{figure} 
+
+
 %----------------------------------------------------------------------------------------
-\section{Despliegue del sistema}
-
-
-
